@@ -2,8 +2,9 @@
 using OpenTK;
 using OpenTK.Input;
 using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
 
-namespace T1___Opening_a_window
+namespace Playground
 {
     class Program
     {
@@ -24,7 +25,7 @@ namespace T1___Opening_a_window
                 KeyboardState keyboard;
                 do
                 {
-                    // Draw nothing, see you in tutorial 2 !
+                    // Draw something !
 
                     // Swap buffers
                     game.SwapBuffers();
