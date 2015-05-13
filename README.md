@@ -1,4 +1,4 @@
-These tutorials were taken from www.opengl-tutorial.org and converted to OpenTK and .NET. All credit should go to them for their hard work.
+These tutorials were taken from www.opengl-tutorial.org and converted to OpenTK and .NET verbatim where language and libaries weren't a problem. All credit should go to them for their hard work.
 
 
 *  [Home](https://github.com/xposure/opengl-tutorial-csharp/wiki)
