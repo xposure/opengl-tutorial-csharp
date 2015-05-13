@@ -1,7 +1,7 @@
 These tutorials were taken from www.opengl-tutorial.org and converted to OpenTK and .NET. All credit should go to them for their hard work.
 
 
-*  Home
+*  [Home](https://github.com/xposure/opengl-tutorial-csharp/wiki)
   *  [Basic OpenGL](https://github.com/xposure/opengl-tutorial-csharp/wiki/Basic-OpenGL)
     *  [Tutorial 1 : Opening a window](https://github.com/xposure/opengl-tutorial-csharp/wiki/Tutorial-1:-Opening-a-window)
     *  Tutorial 2 : The first triangle
