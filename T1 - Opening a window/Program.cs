@@ -9,13 +9,13 @@ namespace T1___Opening_a_window
     {
         static void Main(string[] args)
         {
-            using (var game = new GameWindow(1024, 768,                     //ask for this window size
-                                             GraphicsMode.Default,          //opentk picks the default format
-                                             "Tutorial 01",                 //title in the window
-                                             GameWindowFlags.Default,       //creates a default window style
-                                             DisplayDevice.Default,         //tells it to pick the default monitor
-                                             3, 3,                          //we want opengl 3.3
-                                             GraphicsContextFlags.Default   //default context
+            using (var game = new GameWindow(1024, 768,                         //ask for this window size
+                                             GraphicsMode.Default,              //opentk picks the default format
+                                             "Tutorial 01 - Opening a window",  //title in the window
+                                             GameWindowFlags.Default,           //creates a default window style
+                                             DisplayDevice.Default,             //tells it to pick the default monitor
+                                             3, 3,                              //we want opengl 3.3
+                                             GraphicsContextFlags.Default       //default context
                                             ))
             {
                 game.Visible = true;   //show the window
