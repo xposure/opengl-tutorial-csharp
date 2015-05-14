@@ -67,12 +67,6 @@
                         <p>Source code is available on github <a href="">here</a>.</p>
                         <p>If you enjoy our work, please don’t hesitate to spread the word!</p>
                     </section>
-                    <!--<h1 id="home" class="page-header">Home<a class="anchorjs-link" href="#home"><span class="anchorjs-icon"></span></a></h1>
-                    <section>
-                        <p>This site is dedicated to tutorials for OpenGL 3.3 and later using C# and OpenTK based on the originals tutorials developed by <a href="www.opengl-tutorial.org">www.opengl-tutorial.org</a> in C++, all credit to them for their great work!</p>
-                        <p>Source code is available on github <a href="">here</a>.</p>
-                        <p>If you enjoy our work, please don’t hesitate to spread the word!</p>
-                    </section>-->
                 </section>
                 <section class="bs-docs-section">
                     <h1>Home</h1>
@@ -333,102 +327,10 @@ $ git checkout gh-pages
             <div class="col-md-3" role="complementary">
                 <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top">
                     <ul class="nav bs-docs-sidenav">
-
-                        <li class="">
-                            <a href="#home">Home</a>
-                        </li>
-                        <li class="">
-                            <a href="#basic-tutorials">Basic Tutorials</a>
-                            <ul class="nav">
-                                <li class="">
-                                    <a href="#t1">1: Opening a window</a>
-                                    <ul class="nav">
-                                        <li class=""><a href="#t1-prerequisites" style="padding-right: 20px">Prerequisites</a></li>
-                                        <li class=""><a href="#t1-forget-everything">Forget Everything</a></li>
-                                        <li class="">
-                                            <a href="#t1-building-the-tutorials">Building the tutorials</a>
-                                            <ul class="nav">
-                                                <li class=""><a href="#t1-building-on-windows">Windows</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class=""><a href="#t2">2: Something else</a></li>
-                            </ul>
-                        </li>
-                        <li class="">
-                            <a href="#grunt">Compiling CSS and JavaScript</a>
-                            <ul class="nav">
-                                <li class=""><a href="#grunt-installing">Installing Grunt</a></li>
-                                <li class=""><a href="#grunt-commands">Available Grunt commands</a></li>
-                                <li><a href="#grunt-troubleshooting">Troubleshooting</a></li>
-                            </ul>
-                        </li>
-                        <li class="">
-                            <a href="#template">Basic template</a>
-                        </li>
-                        <li class="">
-                            <a href="#examples">Examples</a>
-                            <ul class="nav">
-                                <li class=""><a href="#examples-framework">Using the framework</a></li>
-                                <li class=""><a href="#examples-navbars">Navbars in action</a></li>
-                                <li class=""><a href="#examples-custom">Custom components</a></li>
-                                <li class=""><a href="#examples-experiments">Experiments</a></li>
-                            </ul>
-                        </li>
-                        <li class="">
-                            <a href="#tools">Tools</a>
-                            <ul class="nav">
-                                <li class=""><a href="#tools-bootlint">Bootlint</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#community">Community</a>
-                        </li>
-                        <li class="">
-                            <a href="#disable-responsive">Disabling responsiveness</a>
-                        </li>
-                        <li>
-                            <a href="#migration">Migrating from 2.x to 3.0</a>
-                        </li>
-                        <li class="">
-                            <a href="#support">Browser and device support</a>
-                            <ul class="nav">
-                                <li class=""><a href="#support-browsers">Supported browsers</a></li>
-                                <li class=""><a href="#support-ie8-ie9">Internet Explorer 8-9</a></li>
-                                <li><a href="#support-ie8-respondjs">IE8 and Respond.js</a></li>
-                                <li><a href="#support-ie8-box-sizing">IE8 and box-sizing</a></li>
-                                <li class=""><a href="#support-ie8-font-face">IE8 and @font-face</a></li>
-                                <li><a href="#support-ie-compatibility-modes">IE Compatibility modes</a></li>
-                                <li class=""><a href="#support-ie10-width">IE10 and Windows (Phone) 8</a></li>
-                                <li class=""><a href="#support-safari-percentages">Safari percent rounding</a></li>
-                                <li class=""><a href="#support-fixed-position-keyboards">Modals, navbars, and virtual keyboards</a></li>
-                                <li class=""><a href="#support-browser-zooming">Browser zooming</a></li>
-                                <li class=""><a href="#support-sticky-hover-mobile">Sticky :hover/:focus on mobile</a></li>
-                                <li class=""><a href="#support-printing">Printing</a></li>
-                                <li class=""><a href="#support-android-stock-browser">Android stock browser</a></li>
-                                <li class=""><a href="#support-validators">Validators</a></li>
-                            </ul>
-                        </li>
-                        <li class="">
-                            <a href="#third-parties">Third party support</a>
-                        </li>
-                        <li class="">
-                            <a href="#accessibility">Accessibility</a>
-                        </li>
-                        <li class="">
-                            <a href="#license-faqs">License FAQs</a>
-                        </li>
-                        <li class="">
-                            <a href="#translations">Translations</a>
-                        </li>
-
-
                     </ul>
                     <a class="back-to-top" href="#top">
                         Back to top
                     </a>
-
                 </nav>
             </div>
         </div>
@@ -446,93 +348,7 @@ $ git checkout gh-pages
     <link rel="stylesheet" href="stylesheets/ie.css">
     <![endif]-->
     <!--[if !IE]><script>fixScale(document);</script><![endif]-->
-
-    <script type="text/javascript">
-        $(function () {
-            var sidebar = $(".bs-docs-sidenav");
-            sidebar.empty();          
-
-            var r = /[a-z0-9]/gi;
-            function cleanString(text) {
-                var newText = "";
-                for (var i = 0 ; i < text.length; i++) {
-                    if (text[i].match(r))
-                        newText += text[i];
-                    else
-                        newText += "-";
-                }
-
-                return newText.toLowerCase();
-            }
-
-            function createEntry(depth, header, sidebar) {
-
-                var text = header.text();
-                var clean = cleanString(text);
-                //<h1 id="home" class="page-header">Home<a class="anchorjs-link" href="#home"><span class="anchorjs-icon"></span></a></h1>
-
-                header.attr("id", clean);
-                header.append("<a class='anchorjs-link' href='#" + clean + "'><span class='anchorjs-icon'></span></a>");
-
-                var navli = $("<li></li>");
-                var nava = $("<a href='#" + clean + "'>" + text + "</a>");
-
-                navli.append(nava);
-                sidebar.append(navli);
-
-                depth++;
-                if (depth < 4) {
-                    var next = header.next();
-                    var ul = $("<ul class='nav'></ul>");
-                    var added = false;
-                    next.find(" > h" + depth).each(function (it) {
-                        if (!added)
-                        {
-                            navli.append(ul);
-                            added = true;
-                        }
-
-                        createEntry(1, $(this), ul);
-                    });
-                }
-            }
-
-            $(".bs-docs-section > h1").each(function (it) {
-                var $this = $(this);
-                createEntry(1, $this, sidebar);
-
-   
-
-                //var next = $this.next();
-                //next.find(" > h2").each(function (it) {
-
-                //});
-
-                //console.debug($this.attr("name"));
-                //$this.id()  
-            });
-
-            var naxSidebar = $(".bs-docs-sidebar");
-            var sidebarTop = naxSidebar.offset().top;
-            $(window).scroll(function () {
-                var top = $(window).scrollTop();
-                if (top > sidebarTop) {
-                    if (naxSidebar.hasClass("affix-top")) {
-                        naxSidebar.removeClass("affix-top").addClass("affix");
-                    }
-                } else {
-                    if (naxSidebar.hasClass("affix")) {
-                        naxSidebar.removeClass("affix").addClass("affix-top");
-                    }
-                }
-            });
-
-            $('body').scrollspy({
-                target: '.bs-docs-sidebar',
-                offset: 40
-            });
-        });
-    </script>
+    <script src="javascripts/sidebar.js"></script>
 
 </body>
 </html>
