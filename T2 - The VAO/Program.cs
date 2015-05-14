@@ -74,7 +74,7 @@ namespace T2___The_VAO
                 LoadShader(vertexID, vertexPath, ShaderType.VertexShader);
                 LoadShader(fragmentID, fragmentPath, ShaderType.FragmentShader);
 
-                Console.WriteLine("Linking program...");
+                Console.WriteLine("Linking program {0}, {1}", vertexPath, fragmentPath);
                 var programID = GL.CreateProgram();
                 GL.AttachShader(programID, vertexID);
                 GL.AttachShader(programID, fragmentID);
@@ -82,9 +82,12 @@ namespace T2___The_VAO
 
                 var result = 0;
                 GL.GetProgram(programID, GetProgramParameterName.LinkStatus, out result);
-                var info = GL.GetProgramInfoLog(programID);
-                Console.WriteLine("Linked program with result: {0}, info: {1}", result, info);
-                
+                if (result != 1)
+                {
+                    var info = GL.GetProgramInfoLog(programID);
+                    Console.WriteLine("FAILED: Linking program with result: {0}, info: {1}", result, info);
+                }
+
                 return programID;
             }
             finally
@@ -107,9 +110,11 @@ namespace T2___The_VAO
 
                 var result = 0;
                 GL.GetShader(shaderID, ShaderParameter.CompileStatus, out result);
-                var info = GL.GetShaderInfoLog(shaderID);
-
-                Console.WriteLine("Compiled shader {0}:{1} with result: {2}, info: {3}", shaderType, path, result, info);
+                if (result != 1)
+                {
+                    var info = GL.GetShaderInfoLog(shaderID);
+                    Console.WriteLine("FAILED: Compiling shader {0}:{1} with result: {2}, info: {3}", shaderType, path, result, info);
+                }
             }
         }
     }
