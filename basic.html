@@ -1,0 +1,311 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>OpenGL Tutorial for OpenTK by Xposure</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="stylesheets/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/docs.min.css">
+    <link rel="stylesheet" href="stylesheets/custom.css">
+
+    <!--<link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">-->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+</head>
+<body>
+    <header class="navbar navbar-static-top bs-docs-nav" id="header" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="../" class="navbar-brand hidden-sm hidden-md hidden-lg">OpenGL Tutorials</a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="https://github.com/xposure/opengl-tutorial-csharp">HOME</a></li>
+                    <li><a class="active" href="https://github.com/xposure/opengl-tutorial-csharp">BEGINNER</a></li>
+                    <li><a href="https://github.com/xposure/opengl-tutorial-csharp">INTERMEDIATE</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="https://github.com/xposure/opengl-tutorial-csharp">GITHUB</a></li>
+                    <li><a href="https://github.com/xposure/opengl-tutorial-csharp/zipball/master">ZIP</a></li>
+                    <li><a href="https://github.com/xposure/opengl-tutorial-csharp/tarball/master">TAR</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <section>
+            <div id="title">
+                <h1>OpenGL Tutorials C#</h1>
+                <p>OpenGL 3.3+ based on http://www.opengl-tutorial.org/</p>
+                <hr>
+                <span class="credits left">Project maintained by <a href="https://github.com/xposure">Xposure</a></span>
+                <span class="credits right">Hosted on GitHub Pages — Theme parts by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+            </div>
+        </section>
+    </div>
+    <div class="container bs-docs-container">
+        <div class="row">
+            <div class="col-md-9" role="main">
+<!-- OPENING A WINDOW       -->
+                <section class="bs-docs-section">
+                    <h1>Opening a window</h1>
+                    <section>
+                        <h2>Introduction</h2>
+                        <section>
+                            <p>Welcome to the first tutorial!</p>
+                            <p>Before jumping into OpenGL, you will first learn how to build the code that goes with each tutorial, how to run it, and most importantly, how to play with the code yourself.</p>
+                        </section>
+                        <h2>Prerequisites</h2>
+                        <section>
+                            <h3>OpenTK 1.1</h3>
+                            <section>
+                                <p>This is a wrapper for .NET to give you access to all the OpenGL commands. You can grab it from <a href="http://www.opentk.com/">here</a>.</p>
+                            </section>
+                            <h3>Visual Studio</h3>
+                            <section>
+                                <p>This series will use Visual Studio 2013 Community Edition which can be found <a href="https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx">here</a>. Visual Studio 2010 or later should also work without any changes.</p>
+                            </section>
+                            <h3>Experience</h3>
+                            <section>
+                                <p>Experience with any programming language ( C, Java, Lisp, Javascript, whatever ) is better to fully understand the code, but not needed ; it will merely be more complicated to learn two things at the same time.</p>
+                                <p>All tutorials are written in “C#” : Lots of effort has been made to make the code as simple as possible. No templates or classes. This way, you will be able to understand everything even if you only know Java.</p>
+                            </section>
+                        </section>
+
+                        <h2>Forget Everything</h2>
+                        <section>
+                            <p>
+                                You don’t have to know anything, but you have to forget everything you know about OpenGL. If you know about something that looks like glBegin(), forget it. Here you will learn modern OpenGL (OpenGL 3 and 4) , and most online tutorials teach “old” OpenGL (OpenGL 1 and 2). So forget everything you might know before your brain melts from the mix.
+                            </p>
+                        </section>
+                        <h2>Building the tutorials</h2>
+                        <section>
+                            <p>All tutorials can be built on Windows <del>, Linux, and MAC</del>:</p>
+                            <ol>
+                                <li> Update your drivers !! doooo it. You’ve been warned.</li>
+                                <li> Download visual studio express or community edition</li>
+                                <li> Download the source code of the tutorials</li>
+                                <li> Build the project</li>
+                                <li> Play with the samples !</li>
+                            </ol>
+                            <h3>Windows</h3>
+                            <section>
+                                <p>Follow these steps if you would like to checkout the completed source code and to play with each tutorial. We will be building this repository based on the tutorials.</p>
+                                <ol>
+                                    <li> Updating your drivers should be easy. Just go to NVIDIA’s or AMD’s website and download the drivers. If unsure about your GPU model : Control Panel -&gt; System and Security -&gt; System -&gt; Device Manager -&gt; Display adapter. If you have an integrated Intel GPU, drivers are usually provided by your OEM (Dell, HP, …).</li>
+                                    <li> We suggest using Visual Studio 2010+ Express as a compiler. You can download it for free here.</li>
+                                    <li> Check out the source code, for instance in <code>C:\Users\XYZ\Projects\OpenGLTutorials\</code>.</li>
+                                    <li> Open <code>C:\Users\XYZ\Projects\OpenGLTutorials\</code>. You will see a <code>OpenGLTutorials.sln</code> file : open it with Visual Studio.</li>
+                                    <li> In the Build menu, click Build All. Hopefuly no error occurs.</li>
+                                    <li> Set playground as the default start up project by right clicking it and selecting the option.</li>
+                                    <li>
+                                        <span>Press F5 to run the project</span>
+                                        <div class="row">
+                                            <img class="col-md-12" src="https://camo.githubusercontent.com/233e72d8b9d04ddfed692a1eeb8d0d7472e170f9/687474703a2f2f7777772e6f70656e676c2d7475746f7269616c2e6f72672f77702d636f6e74656e742f75706c6f6164732f323031312f30342f656d7074795f77696e646f772e706e67" alt="sample screen" data-canonical-src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/empty_window.png">
+                                        </div>
+                                        <span>You will see an empty window like this and can press escape to quit.</span>
+                                    </li>
+                                </ol>
+                            </section>
+                        </section>
+                        <h2>Running the tutorials</h2>
+                        <section>
+                            <p>You can run the tutorials directly from the directory : simply double-click on the executable. If you like command line best, cd to the right directory.</p>
+                            <p>You can also run the tutorials from the IDE by right clicking a project and selecting it as the start up project.</p>
+                        </section>
+                        <h2>Following along</h2>
+                        <section>
+                            <p>Each tutorial comes with its source code and data, which can be found in tutorialXX/. However, you will never modify these projects : they are for reference only. Open playground/playground.cpp, and tweak this file instead. Torture it in any way you like. If you are lost, simply cut’n paste any tutorial in it, and everything should be back to normal.</p>
+                            <p>We will provide snippets of code all along the tutorials. Don’t hesitate to cut’n paste them directly in the playground while you’re reading : experimentation is good. Avoid simply reading the finished code, you won’t learn a lot this way. Even with simple cut’n pasting, you’ll get your boatload of problems.</p>
+                        </section>
+                        <h2>Starting from scratch</h2>
+                        <section>
+                            <ol>
+                                <li> First thing you want to do is open up Visual Studio.</li>
+                                <li>
+                                    Next go to <code>File</code> -&gt; <code>New</code> -&gt; <code>Project</code>
+                                </li>
+                                <li> Select a Visual C# Console Application</li>
+                                <li>
+                                    For the <code>Name</code> you can put <code>T1 - Opening a window</code>
+                                </li>
+                                <li> For the location you can set it where ever you like, the default should be <code>c:\users\&lt;YOUR_USER&gt;\documents\visual studio 2013\Projects\</code> which is what we will use</li>
+                                <li>
+                                    Check <code>Create directory for solution</code>
+                                </li>
+                                <li>
+                                    For the solution name, we will set it to <code>OpenGLTutorials</code>
+                                </li>
+                                <li>
+                                    Last we need to add a reference to OpenTK to our project, you will have to do this every time you start a new tutorial, so remember these steps.
+
+                                    <ol>
+                                        <li>
+                                            Right click <code>References</code> under <code>T1 - Opening a window</code> and select <code>Add Reference</code>
+                                        </li>
+                                        <li>
+                                            Next you want to make sure that <code>Assemblie</code> -&gt; <code>Framework</code> is selected and in the search assemblies on the right, type <code>opentk</code>. Note: If there is more than one listed, take the latest 1.1 version, for example, mine is <code>File Version: 1.1.1664.6217</code>
+                                        </li>
+                                        <li>
+                                            Check the correct <code>OpenTK</code> entry and click <code>OK</code>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li> You are now ready for your first tutorial</li>
+                            </ol>
+                        </section>
+                        <h2>Opening the window</h2>
+                        <section>
+                            <p>Finally ! OpenGL code ! Well, not really. All tutorials show you the “low level” way to do things, so that you can see that no magic happens.</p>
+                            <p>Ok, let’s go. First we need to open up <code>program.cs</code> and set the correct <code>using</code> statements, they should look like this.</p>
+<pre><code>using System;
+using OpenTK;
+using OpenTK.Input;
+using OpenTK.Graphics;
+</code></pre>
+                            <p>We can add this to get our first OpenGL window!</p>
+                            <pre><code>using (var game = new GameWindow(1024, 768,
+                       GraphicsMode.Default,          //default format
+                       "Tutorial 01",                 //title in the window
+                       GameWindowFlags.Default,       //default window style
+                       DisplayDevice.Default,         //default monitor
+                       3,3,                           //we want opengl 3.3
+                       GraphicsContextFlags.Default   //default context
+                       ))
+{
+    game.Visible = true;   //show the window
+</code></pre>
+                            <p>Build this and run. A window should appear, and be closed right away. Of course ! We need to wait until the user hits the Escape key :</p>
+                        </section>
+                        <pre><code>//variable to store the latest keyboard state
+KeyboardState keyboard;
+do
+{
+    // Draw nothing, see you in tutorial 2 !
+    // Swap buffers
+    game.SwapBuffers();
+    game.ProcessEvents();
+    //we need to poll the current keyboard state
+    keyboard = OpenTK.Input.Keyboard.GetState();
+}   // Check if the ESC key was pressed or the window was closed
+while (!keyboard[Key.Escape]);</code></pre>
+                        <p>And this concludes our first tutorial ! In Tutorial 2, you will learn how to actually draw a triangle.</p>
+                        <p>Here is the final output...</p>
+                        <pre><code>using System;
+using OpenTK;
+using OpenTK.Input;
+using OpenTK.Graphics;
+namespace T1___Opening_a_window
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            using (var game = new GameWindow(1024, 768,            
+                               GraphicsMode.Default,          //default format
+                               "Tutorial 01",                 //title in the window
+                               GameWindowFlags.Default,       //default window style
+                               DisplayDevice.Default,         //default monitor
+                               3, 3,                          //we want opengl 3.3
+                               GraphicsContextFlags.Default   //default context
+                               ))
+            {
+                game.Visible = true;   //show the window
+                //variable to store the latest keyboard state
+                KeyboardState keyboard;
+                do
+                {
+                    // Draw nothing, see you in tutorial 2 !
+                    // Swap buffers
+                    game.SwapBuffers();
+                    game.ProcessEvents();
+                    //we need to poll the current keyboard state
+                    keyboard = OpenTK.Input.Keyboard.GetState();
+                }   // Check if the ESC key was pressed or the window was closed
+                    // Also make sure they didn't click the "X" to close the window
+                while (!game.IsExiting && !keyboard[Key.Escape]);
+            }
+        }
+    }
+}</code></pre>
+                    </section>
+                </section>
+<!--  THE FIRST TRIANGLE    -->
+                <section class="bs-docs-section">
+                    <h1>The first triangle</h1>
+                    <section></section>
+                </section>
+<!--  MATRICES              -->
+                <section class="bs-docs-section">
+                    <h1>Matrices</h1>
+                    <section></section>
+                </section>
+<!--  A COLORED CUBE        --> 
+                <section class="bs-docs-section">
+                    <h1>A colored cube</h1>
+                    <section></section>
+                </section>
+<!--  A TEXTURED CUBE       -->
+                <section class="bs-docs-section">
+                    <h1>A textured cube</h1>
+                    <section></section>
+                </section>
+<!--  KEYBOARD AND MOUSE    -->
+                <section class="bs-docs-section">
+                    <h1>Keyboard and mouse</h1>
+                    <section></section>
+                </section>
+<!--  MODEL LOADING         -->
+                <section class="bs-docs-section">
+                    <h1>Model loading</h1>
+                    <section></section>
+                </section>
+<!--  BASIC SHADING         -->
+                <section class="bs-docs-section">
+                    <h1>Basic shading</h1>
+                    <section></section>
+                </section>
+            </div>
+            <div class="col-md-3" role="complementary">
+                <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top">
+                    <ul class="nav bs-docs-sidenav"></ul>
+                    <a class="back-to-top" href="#top">
+                        Back to top
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="stylesheets/vs.css" />
+    <script src="javascripts/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    <script src="javascripts/sidebar.js"></script>
+
+</body>
+</html>

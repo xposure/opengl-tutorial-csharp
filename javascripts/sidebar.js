@@ -31,7 +31,7 @@ $(function () {
         sidebar.append(navli);
 
         depth++;
-        if (depth < 4) {
+        if (depth < 5) {
             var next = header.next();
             var ul = $("<ul class='nav'></ul>");
             var added = false;
@@ -41,7 +41,7 @@ $(function () {
                     added = true;
                 }
 
-                createEntry(1, $(this), ul);
+                createEntry(depth, $(this), ul);
             });
         }
     }
