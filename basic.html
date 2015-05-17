@@ -33,9 +33,9 @@
             </div>
             <nav class="collapse navbar-collapse bs-navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="https://github.com/xposure/opengl-tutorial-csharp">HOME</a></li>
-                    <li><a class="active" href="https://github.com/xposure/opengl-tutorial-csharp">BEGINNER</a></li>
-                    <li><a href="https://github.com/xposure/opengl-tutorial-csharp">INTERMEDIATE</a></li>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a class="active" href="basic.html">BEGINNER</a></li>
+                    <li><a href="intermediate.html">INTERMEDIATE</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="https://github.com/xposure/opengl-tutorial-csharp">GITHUB</a></li>
@@ -48,7 +48,7 @@
     <div class="container">
         <section>
             <div id="title">
-                <h1>OpenGL Tutorials C#</h1>
+                <h1 class="page-header">OpenGL Tutorials C#</h1>
                 <p>OpenGL 3.3+ based on http://www.opengl-tutorial.org/</p>
                 <hr>
                 <span class="credits left">Project maintained by <a href="https://github.com/xposure">Xposure</a></span>
@@ -61,7 +61,7 @@
             <div class="col-md-9" role="main">
 <!-- OPENING A WINDOW       -->
                 <section class="bs-docs-section">
-                    <h1>Opening a window</h1>
+                    <h1 class="page-header">Opening a window</h1>
                     <section>
                         <h2>Introduction</h2>
                         <section>
@@ -88,7 +88,7 @@
                         <h2>Forget Everything</h2>
                         <section>
                             <p>
-                                You don’t have to know anything, but you have to forget everything you know about OpenGL. If you know about something that looks like glBegin(), forget it. Here you will learn modern OpenGL (OpenGL 3 and 4) , and most online tutorials teach “old” OpenGL (OpenGL 1 and 2). So forget everything you might know before your brain melts from the mix.
+                                You don’t have to know anything, but you have to forget everything you know about OpenGL. If you know about something that looks like GL.Begin(), forget it. Here you will learn modern OpenGL (OpenGL 3 and 4) , and most online tutorials teach “old” OpenGL (OpenGL 1 and 2). So forget everything you might know before your brain melts from the mix.
                             </p>
                         </section>
                         <h2>Building the tutorials</h2>
@@ -245,7 +245,7 @@ namespace T1___Opening_a_window
                 </section>
 <!--  THE FIRST TRIANGLE    -->
                 <section class="bs-docs-section">
-                    <h1>The first triangle</h1>
+                    <h1 class="page-header">The first triangle</h1>
                     <section>
                         <p>This will be another long tutorial.</p>
                         <p>OpenGL 3 makes it easy to write complicated stuff, but at the expense that drawing a simple triangle is actually quite difficult.</p>
@@ -391,7 +391,7 @@ private static void LoadShader(int shaderID, string path, ShaderType shaderType)
                                 <p>Let’s explain this line in detail :</p>
                                 <ul>
                                     <li><code>vec3</code> is a vector of 3 components in GLSL. It is similar (but different) to the <code>OpenTK.Vector3</code> we used to declare our triangle. The important thing is that if we use 3 components in C#, we use 3 components in GLSL too.</li>
-                                    <li><code>layout(location = 0)</code> refers to the buffer we use to feed the <code>vertexPosition_modelspace</code> attribute. Each vertex can have numerous attributes : A position, one or several colours, one or several texture coordinates, lots of other things. OpenGL doesn’t know what a colour is : it just sees a vec3. So we have to tell him which buffer corresponds to which input. We do that by setting the layout to the same value as the first parameter to glVertexAttribPointer. The value “0″ is not important, it could be 12 (but no more than <code>GL.GetInteger(GetPName.MaxVertexAttribs);</code> ), the important thing is that it’s the same number on both sides.</li>
+                                    <li><code>layout(location = 0)</code> refers to the buffer we use to feed the <code>vertexPosition_modelspace</code> attribute. Each vertex can have numerous attributes : A position, one or several colours, one or several texture coordinates, lots of other things. OpenGL doesn’t know what a colour is : it just sees a vec3. So we have to tell him which buffer corresponds to which input. We do that by setting the layout to the same value as the first parameter to GL.VertexAttribPointer. The value “0″ is not important, it could be 12 (but no more than <code>GL.GetInteger(GetPName.MaxVertexAttribs);</code> ), the important thing is that it’s the same number on both sides.</li>
                                     <li><code>vertexPosition_modelspace</code> could be anything else. It will contain the position of the vertex for each run of the vertex shader.</li>
                                     <li><code>in</code> means that this is some input data. Soon we’ll see the <code>out</code> keyword.</li>
                                 </ul>
@@ -422,9 +422,9 @@ void main(){
 var programID = LoadShaders("simple.vert", "simple.frag");
 
 // Set the clear color
-glClearColor(0.0f, 0.0f, 0.4f, 0.0f)</code></pre>
-                            <p>Now inside the main loop, first clear the screen. This will change the background color to dark blue because of the glClearColor(0.0f, 0.0f, 0.4f, 0.0f) call above the main loop :</p>
-                            <pre><code>GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);</code></pre>
+GL.ClearColor(0.0f, 0.0f, 0.4f, 0.0f)</code></pre>
+                            <p>Now inside the main loop, first clear the screen. This will change the background color to dark blue because of the ClearColor(0.0f, 0.0f, 0.4f, 0.0f) call above the main loop :</p>
+                            <pre><code>GL.Clear(ClearBufferMask.ColorBufferBit);</code></pre>
                             <p>and then tell OpenGL that you want to use your shader :</p>
                             <pre><code>// Use our shader
 GL.UseProgram(programID);</code></pre>
@@ -436,7 +436,7 @@ GL.UseProgram(programID);</code></pre>
                 </section>
 <!--  MATRICES              -->
                 <section class="bs-docs-section">
-                    <h1>Matrices</h1>
+                    <h1 class="page-header">Matrices</h1>
                     <section>
                         <p>
                             <i>The engines don’t move the ship at all. The ship stays where it is and the engines move the universe around it.</i>
@@ -690,27 +690,216 @@ void main(){
                 </section>
 <!--  A COLORED CUBE        --> 
                 <section class="bs-docs-section">
-                    <h1>A colored cube</h1>
-                    <section></section>
+                    <h1 class="page-header">A colored cube</h1>
+                    <section>
+                        <p>Welcome for the 4rth tutorial ! You will do the following :</p>
+                        <ul>
+                            <li>Draw a cube instead of the boring triangle</li>
+                            <li>Add some fancy colors</li>
+                            <li>Learn what the Z-Buffer is</li>
+                        </ul>
+                        <h2>Draw a cube</h2>
+                        <section>
+                            <p>A cube has six square faces. Since OpenGL only knows about triangles, we’ll have to draw 12 triangles : two for each face. We just define our vertices in the same way as we did for the triangle.</p>
+                            <pre><code>// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
+// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
+var g_vertex_buffer_data = new[] {
+    -1.0f,-1.0f,-1.0f, // triangle 1 : begin
+    -1.0f,-1.0f, 1.0f,
+    -1.0f, 1.0f, 1.0f, // triangle 1 : end
+    1.0f, 1.0f,-1.0f, // triangle 2 : begin
+    -1.0f,-1.0f,-1.0f,
+    -1.0f, 1.0f,-1.0f, // triangle 2 : end
+    1.0f,-1.0f, 1.0f,
+    -1.0f,-1.0f,-1.0f,
+    1.0f,-1.0f,-1.0f,
+    1.0f, 1.0f,-1.0f,
+    1.0f,-1.0f,-1.0f,
+    -1.0f,-1.0f,-1.0f,
+    -1.0f,-1.0f,-1.0f,
+    -1.0f, 1.0f, 1.0f,
+    -1.0f, 1.0f,-1.0f,
+    1.0f,-1.0f, 1.0f,
+    -1.0f,-1.0f, 1.0f,
+    -1.0f,-1.0f,-1.0f,
+    -1.0f, 1.0f, 1.0f,
+    -1.0f,-1.0f, 1.0f,
+    1.0f,-1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f,
+    1.0f,-1.0f,-1.0f,
+    1.0f, 1.0f,-1.0f,
+    1.0f,-1.0f,-1.0f,
+    1.0f, 1.0f, 1.0f,
+    1.0f,-1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f,-1.0f,
+    -1.0f, 1.0f,-1.0f,
+    1.0f, 1.0f, 1.0f,
+    -1.0f, 1.0f,-1.0f,
+    -1.0f, 1.0f, 1.0f,
+    1.0f, 1.0f, 1.0f,
+    -1.0f, 1.0f, 1.0f,
+    1.0f,-1.0f, 1.0f
+};</code></pre>
+                            <p>The OpenGL buffer is created, bound, filled and configured with the standard functions (GL.GenBuffers, GL.BindBuffer, GL.BufferData, GL.VertexAttribPointer) ; see Tutorial 2 for a quick reminder. The draw call does not change either, you just have to set the right number of vertices that must be drawn :</p>
+                            <pre><code>// Draw the triangle !
+GL.DrawArrays(PrimitiveType.Triangles, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles -> 6 squares
+</code></pre>
+                            <p>A few remarks on this code :</p>
+                            <ul>
+                                <li>For now, our 3D model is fixed : in order to change it, you have to modify the source code, recompile the application, and hope for the best. We’ll learn how to load dynamic models in tutorial 7.</li>
+                                <li>Each vertex is actually written at least 3 times (search “-1.0f,-1.0f,-1.0f” in the code above). This is an awful waste of memory. We’ll learn how to deal with this in tutorial 9.</li>
+                            </ul>
+                            <p>You now have all the needed pieces to draw the cube in white. Make the shaders work ! go on, at least try :)</p>
+                        </section>
+                        <h2>Adding colors</h2>
+                        <section>
+                            <p>A color is, conceptually, exactly the same as a position : it’s just data. In OpenGL terms, they are “attributes”. As a matter of fact, we already used this with <code>GL.EnableVertexAttribArray()</code> and <code>GL.VertexAttribPointer()</code>. Let’s add another attribute. The code is going to be very similar.</p>
+                            <p>First, declare your colors : one RGB triplet per vertex. Here I generated some randomly, so the result won’t look that good, but you can do something better, for instance by copying the vertex’s position into its own color.</p>
+                            <pre><code>// One color for each vertex. They were generated randomly.
+var g_color_buffer_data = new[] {
+    0.583f,  0.771f,  0.014f,
+    0.609f,  0.115f,  0.436f,
+    0.327f,  0.483f,  0.844f,
+    0.822f,  0.569f,  0.201f,
+    0.435f,  0.602f,  0.223f,
+    0.310f,  0.747f,  0.185f,
+    0.597f,  0.770f,  0.761f,
+    0.559f,  0.436f,  0.730f,
+    0.359f,  0.583f,  0.152f,
+    0.483f,  0.596f,  0.789f,
+    0.559f,  0.861f,  0.639f,
+    0.195f,  0.548f,  0.859f,
+    0.014f,  0.184f,  0.576f,
+    0.771f,  0.328f,  0.970f,
+    0.406f,  0.615f,  0.116f,
+    0.676f,  0.977f,  0.133f,
+    0.971f,  0.572f,  0.833f,
+    0.140f,  0.616f,  0.489f,
+    0.997f,  0.513f,  0.064f,
+    0.945f,  0.719f,  0.592f,
+    0.543f,  0.021f,  0.978f,
+    0.279f,  0.317f,  0.505f,
+    0.167f,  0.620f,  0.077f,
+    0.347f,  0.857f,  0.137f,
+    0.055f,  0.953f,  0.042f,
+    0.714f,  0.505f,  0.345f,
+    0.783f,  0.290f,  0.734f,
+    0.722f,  0.645f,  0.174f,
+    0.302f,  0.455f,  0.848f,
+    0.225f,  0.587f,  0.040f,
+    0.517f,  0.713f,  0.338f,
+    0.053f,  0.959f,  0.120f,
+    0.393f,  0.621f,  0.362f,
+    0.673f,  0.211f,  0.457f,
+    0.820f,  0.883f,  0.371f,
+    0.982f,  0.099f,  0.879f
+};</code></pre>
+                            <p>The buffer is created, bound and filled in the exact same way as the previous one :</p>
+                            <pre><code>var colorBuffer = GL.GenBuffer();
+GL.BindBuffer(BufferTarget.ArrayBuffer, colorBuffer);
+var colorBufferSize = new IntPtr(sizeof(float) * g_color_buffer_data.Length);
+GL.BufferData(BufferTarget.ArrayBuffer, colorBufferSize, g_color_buffer_data, BufferUsageHint.StaticDraw);</code></pre>
+                            <p>The configuration is also identical :</p>
+                            <pre><code>GL.EnableVertexAttribArray(1);
+GL.BindBuffer(BufferTarget.ArrayBuffer, colorBuffer);
+GL.VertexAttribPointer(
+    1,                              // attribute index
+    3,                              // size
+    VertexAttribPointerType.Float,  // type
+    false,                          // normalized?
+    0,                              // stride
+    0                               // offset
+);</code></pre>
+                            <p>Now, in the vertex shader, we have access to this additional buffer :</p>
+                            <pre><code class="glsl">// Notice that the "1" here equals the "1" in glVertexAttribPointer
+layout(location = 1) in vec3 vertexColor;</code></pre>
+                            <p>In our case, we won’t do anything fancy with it in the vertex shader. We will simply forward it to the fragment shader :</p>
+                            <pre><code class="glsl">// Output data ; will be interpolated for each fragment.
+out vec3 fragmentColor;
+ 
+void main(){
+ 
+    [...]
+ 
+    // The color of each vertex will be interpolated
+    // to produce the color of each fragment
+    fragmentColor = vertexColor;
+}</code></pre>
+                            <p>In the fragment shader, you declare fragmentColor again :</p>
+                            <pre><code>// Interpolated values from the vertex shaders
+in vec3 fragmentColor;</code></pre>
+                            <p>… and copy it in the final output color :</p>
+                            <pre><code class="glsl">// Ouput data
+out vec3 color;
+ 
+void main(){
+    // Output color = color specified in the vertex shader,
+    // interpolated between all 3 surrounding vertices
+    color = fragmentColor;
+}</code></pre>
+                            <p>And that’s what we get :</p>
+                            <p class="row"><img class="col-md-12" src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/missing_z_buffer.png" /></p>
+                            <p>Urgh. Ugly. To understand what happens, here’s what happens when you draw a “far” triangle and a “near” triangle :</p>
+                            <p><img src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/FarNear.png" /></p>
+                            <p>Seems OK. Now draw the “far” triangle last :</p>
+                            <p><img src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/NearFar.png" /></p>
+                            <p>It overdraws the “near” one, even though it’s supposed to be behind it ! This is what happens with our cube: some faces are supposed to be hidden, but since they are drawn last, they are visible. Let’s call the Z-Buffer to the rescue !</p>
+                            <p><i>Quick Note 1</i>: If you don’t see the problem, change your camera position to (4,3,-3)</p>
+                            <p><i>Quick Note 2</i>: if “color is like position, it’s an attribute”, why do we need to declare out vec3 fragmentColor; and in vec3 fragmentColor; for the color, and not for the position ? Because the position is actually a bit special : It’s the only thing that is compulsory (or OpenGL wouldn’t know where to draw the triangle !). So in the vertex shader, gl_Position is a “built-in” variable.</p>
+                        </section>
+                        <h2>The Z-Buffer</h2>
+                        <section>
+                            <p>The solution to this problem is to store the depth (i.e. “Z”) component of each fragment in a buffer, and each and every time you want to write a fragment, you first check if you should (i.e the new fragment is closer than the previous one).</p>
+                            <p>You can do this yourself, but it’s so much simpler to just ask the hardware to do it itself :</p>
+                            <pre><code>// Enable depth test
+GL.Enable(EnableCap.DepthTest);
+// Accept fragment if it closer to the camera than the former one
+GL.DepthFunc(DepthFunction.Less);</code></pre>
+                            <p>You also need to clear the depth each frame, instead of only the color :</p>
+                            <pre><code>// Clear the screen
+GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+</code></pre>
+                            <p>And this is enough to solve all your problems.</p>
+                            <p><img src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/one_color_per_vertex-300x231.png" /></p>
+                        </section>
+                        <h2>Exercises</h2>
+                        <section>
+                            <ul>
+                                <li>Draw the cube AND the triangle, at different locations. You will need to generate 2 MVP matrices, to make 2 draw calls in the main loop, but only 1 shader is required.</li>
+                                <li>Generate the color values yourself. Some ideas : At random, so that colors change at each run; Depending on the position of the vertex; a mix of the two; Some other creative idea :) In case you don’t know C#, here’s the syntax :</li>
+                            </ul>
+                            <pre><code>var g_color_buffer_data = new float[12 * 3 * 3];
+for (int v = 0; v < 12*3 ; v++){
+    g_color_buffer_data[3*v+0] = your red color here;
+    g_color_buffer_data[3*v+1] = your green color here;
+    g_color_buffer_data[3*v+2] = your blue color here;
+}
+</code></pre>
+                            <ul>
+                                <li>Once you’ve done that, make the colors change each frame. You’ll have to call GL.BufferData each frame. Make sure the appropriate buffer is bound (GL.BindBuffer) before !</li>
+                            </ul>
+                        </section>
+                    </section>
                 </section>
 <!--  A TEXTURED CUBE       -->
                 <section class="bs-docs-section">
-                    <h1>A textured cube</h1>
+                    <h1 class="page-header">A textured cube</h1>
                     <section></section>
                 </section>
 <!--  KEYBOARD AND MOUSE    -->
                 <section class="bs-docs-section">
-                    <h1>Keyboard and mouse</h1>
+                    <h1 class="page-header">Keyboard and mouse</h1>
                     <section></section>
                 </section>
 <!--  MODEL LOADING         -->
                 <section class="bs-docs-section">
-                    <h1>Model loading</h1>
+                    <h1 class="page-header">Model loading</h1>
                     <section></section>
                 </section>
 <!--  BASIC SHADING         -->
                 <section class="bs-docs-section">
-                    <h1>Basic shading</h1>
+                    <h1 class="page-header">Basic shading</h1>
                     <section></section>
                 </section>
             </div>
