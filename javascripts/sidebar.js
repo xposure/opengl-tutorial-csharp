@@ -3,6 +3,7 @@ $(function () {
     sidebar.empty();
 
     var r = /[a-z0-9]/gi;
+    var itemCount = 0;
     function cleanString(text) {
         var newText = "";
         for (var i = 0 ; i < text.length; i++) {
@@ -18,7 +19,7 @@ $(function () {
     function createEntry(depth, header, sidebar) {
 
         var text = header.text();
-        var clean = cleanString(text);
+        var clean = cleanString(text) + "_" + itemCount;
         //<h1 id="home" class="page-header">Home<a class="anchorjs-link" href="#home"><span class="anchorjs-icon"></span></a></h1>
 
         header.attr("id", clean);
@@ -49,6 +50,7 @@ $(function () {
     $(".bs-docs-section > h1").each(function (it) {
         var $this = $(this);
         createEntry(1, $this, sidebar);
+        itemCount++;
     });
 
     var naxSidebar = $(".bs-docs-sidebar");
