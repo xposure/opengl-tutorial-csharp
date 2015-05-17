@@ -53,7 +53,7 @@ namespace T2___The_VAO
                 {
                     // Draw something !
 
-                    GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
+                    GL.Clear(ClearBufferMask.ColorBufferBit);
 
                     // Use our shader
                     GL.UseProgram(programID);
