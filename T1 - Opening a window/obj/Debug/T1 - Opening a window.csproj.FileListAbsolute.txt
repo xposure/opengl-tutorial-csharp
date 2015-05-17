@@ -1,9 +1,0 @@
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\bin\Debug\T1 - Opening a window.exe.config
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\bin\Debug\T1 - Opening a window.exe
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\bin\Debug\T1 - Opening a window.pdb
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\bin\Debug\OpenTK.dll
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\bin\Debug\OpenTK.pdb
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\bin\Debug\OpenTK.xml
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\obj\Debug\T1 - Opening a window.csprojResolveAssemblyReference.cache
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\obj\Debug\T1 - Opening a window.exe
-C:\Users\Xposure\Documents\XGithub\opengl-tutorial-csharp\T1 - Opening a window\obj\Debug\T1 - Opening a window.pdb
