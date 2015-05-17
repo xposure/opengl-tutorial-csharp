@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playground", "Playground\Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T2 - The VAO", "T2 - The VAO\T2 - The VAO.csproj", "{72AB92F8-8AFC-46B5-9D2F-9A430F886FAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "T3 - Matrices", "T3 - Matrices\T3 - Matrices.csproj", "{38DC6931-4E4D-4303-82CF-CEC32EF95760}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{72AB92F8-8AFC-46B5-9D2F-9A430F886FAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72AB92F8-8AFC-46B5-9D2F-9A430F886FAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72AB92F8-8AFC-46B5-9D2F-9A430F886FAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38DC6931-4E4D-4303-82CF-CEC32EF95760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38DC6931-4E4D-4303-82CF-CEC32EF95760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38DC6931-4E4D-4303-82CF-CEC32EF95760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38DC6931-4E4D-4303-82CF-CEC32EF95760}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
