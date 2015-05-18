@@ -5,7 +5,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using System.IO;
 
-namespace T4___A_colored_cube
+namespace T5___A_textured_cube
 {
     class Program
     {
@@ -13,7 +13,7 @@ namespace T4___A_colored_cube
         {
             using (var game = new GameWindow(1024, 768,                     //ask for this window size
                                              GraphicsMode.Default,          //opentk picks the default format
-                                             "Tutorial 04 - A colored cube",//title in the window
+                                             "Tutorial 05 - A textured cube",//title in the window
                                              GameWindowFlags.Default,       //creates a default window style
                                              DisplayDevice.Default,         //tells it to pick the default monitor
                                              3, 3,                          //we want opengl 3.3
@@ -81,52 +81,53 @@ namespace T4___A_colored_cube
                 GL.BufferData(BufferTarget.ArrayBuffer, vertexBufferSize, g_vertex_buffer_data,
                                 BufferUsageHint.StaticDraw);
 
-                // One color for each vertex. They were generated randomly.
-                var g_color_buffer_data = new[] {
-                    0.583f,  0.771f,  0.014f,
-                    0.609f,  0.115f,  0.436f,
-                    0.327f,  0.483f,  0.844f,
-                    0.822f,  0.569f,  0.201f,
-                    0.435f,  0.602f,  0.223f,
-                    0.310f,  0.747f,  0.185f,
-                    0.597f,  0.770f,  0.761f,
-                    0.559f,  0.436f,  0.730f,
-                    0.359f,  0.583f,  0.152f,
-                    0.483f,  0.596f,  0.789f,
-                    0.559f,  0.861f,  0.639f,
-                    0.195f,  0.548f,  0.859f,
-                    0.014f,  0.184f,  0.576f,
-                    0.771f,  0.328f,  0.970f,
-                    0.406f,  0.615f,  0.116f,
-                    0.676f,  0.977f,  0.133f,
-                    0.971f,  0.572f,  0.833f,
-                    0.140f,  0.616f,  0.489f,
-                    0.997f,  0.513f,  0.064f,
-                    0.945f,  0.719f,  0.592f,
-                    0.543f,  0.021f,  0.978f,
-                    0.279f,  0.317f,  0.505f,
-                    0.167f,  0.620f,  0.077f,
-                    0.347f,  0.857f,  0.137f,
-                    0.055f,  0.953f,  0.042f,
-                    0.714f,  0.505f,  0.345f,
-                    0.783f,  0.290f,  0.734f,
-                    0.722f,  0.645f,  0.174f,
-                    0.302f,  0.455f,  0.848f,
-                    0.225f,  0.587f,  0.040f,
-                    0.517f,  0.713f,  0.338f,
-                    0.053f,  0.959f,  0.120f,
-                    0.393f,  0.621f,  0.362f,
-                    0.673f,  0.211f,  0.457f,
-                    0.820f,  0.883f,  0.371f,
-                    0.982f,  0.099f,  0.879f
+                // Two UV coordinatesfor each vertex. They were created with Blender. You'll learn shortly how to do this yourself.
+                var g_uv_buffer_data = new[] {
+                    0.000059f, 1.0f-0.000004f,
+                    0.000103f, 1.0f-0.336048f,
+                    0.335973f, 1.0f-0.335903f,
+                    1.000023f, 1.0f-0.000013f,
+                    0.667979f, 1.0f-0.335851f,
+                    0.999958f, 1.0f-0.336064f,
+                    0.667979f, 1.0f-0.335851f,
+                    0.336024f, 1.0f-0.671877f,
+                    0.667969f, 1.0f-0.671889f,
+                    1.000023f, 1.0f-0.000013f,
+                    0.668104f, 1.0f-0.000013f,
+                    0.667979f, 1.0f-0.335851f,
+                    0.000059f, 1.0f-0.000004f,
+                    0.335973f, 1.0f-0.335903f,
+                    0.336098f, 1.0f-0.000071f,
+                    0.667979f, 1.0f-0.335851f,
+                    0.335973f, 1.0f-0.335903f,
+                    0.336024f, 1.0f-0.671877f,
+                    1.000004f, 1.0f-0.671847f,
+                    0.999958f, 1.0f-0.336064f,
+                    0.667979f, 1.0f-0.335851f,
+                    0.668104f, 1.0f-0.000013f,
+                    0.335973f, 1.0f-0.335903f,
+                    0.667979f, 1.0f-0.335851f,
+                    0.335973f, 1.0f-0.335903f,
+                    0.668104f, 1.0f-0.000013f,
+                    0.336098f, 1.0f-0.000071f,
+                    0.000103f, 1.0f-0.336048f,
+                    0.000004f, 1.0f-0.671870f,
+                    0.336024f, 1.0f-0.671877f,
+                    0.000103f, 1.0f-0.336048f,
+                    0.336024f, 1.0f-0.671877f,
+                    0.335973f, 1.0f-0.335903f,
+                    0.667969f, 1.0f-0.671889f,
+                    1.000004f, 1.0f-0.671847f,
+                    0.667979f, 1.0f-0.335851f
                 };
 
-                var colorBuffer = GL.GenBuffer();
-                GL.BindBuffer(BufferTarget.ArrayBuffer, colorBuffer);
+                var uvBuffer = GL.GenBuffer();
+                GL.BindBuffer(BufferTarget.ArrayBuffer, uvBuffer);
 
-                var colorBufferSize = new IntPtr(sizeof(float) * g_color_buffer_data.Length);
-                GL.BufferData(BufferTarget.ArrayBuffer, colorBufferSize, g_color_buffer_data, BufferUsageHint.StaticDraw);
+                var uvBufferSize = new IntPtr(sizeof(float) * g_uv_buffer_data.Length);
+                GL.BufferData(BufferTarget.ArrayBuffer, uvBufferSize, g_uv_buffer_data, BufferUsageHint.StaticDraw);
 
+                var textureID = loadBMP_custom("uvtemplate.bmp");
                 var programID = LoadShaders("simple.vert", "simple.frag");
 
 
@@ -165,6 +166,9 @@ namespace T4___A_colored_cube
                     // Clear the screen
                     GL.Clear(ClearBufferMask.DepthBufferBit | ClearBufferMask.ColorBufferBit);
 
+                    // Use our texture
+                    GL.BindTexture(TextureTarget.Texture2D, textureID);
+
                     // Use our shader
                     GL.UseProgram(programID);
                     GL.UniformMatrix4(MatrixID, false, ref MVP);
@@ -183,10 +187,10 @@ namespace T4___A_colored_cube
 
 
                     GL.EnableVertexAttribArray(1);
-                    GL.BindBuffer(BufferTarget.ArrayBuffer, colorBuffer);
+                    GL.BindBuffer(BufferTarget.ArrayBuffer, uvBuffer);
                     GL.VertexAttribPointer(
                         1,                              // attribute index
-                        3,                              // size
+                        2,                              // size
                         VertexAttribPointerType.Float,  // type
                         false,                          // normalized?
                         0,                              // stride
@@ -261,6 +265,73 @@ namespace T4___A_colored_cube
                     var info = GL.GetShaderInfoLog(shaderID);
                     Console.WriteLine("FAILED: Compiling shader {0}:{1} with result: {2}, info: {3}", shaderType, path, result, info);
                 }
+            }
+        }
+
+        public static int loadBMP_custom(string filepath)
+        {
+            // Data read from the header of the BMP file
+            var header = new byte[54]; // Each BMP file begins by a 54-bytes header
+            var dataPos = 0;     // Position in the file where the actual data begins
+            var width = 0;
+            var height = 0;
+            var imageSize = 0;   // = width*height*3
+
+            if (!System.IO.File.Exists(filepath))
+            {
+                Console.WriteLine("Image [{0}] could not be found.", filepath);
+                return 0;
+            }
+
+            var fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
+            try
+            {
+                if (fs.Read(header, 0, 54) != 54)
+                {
+                    // If not 54 bytes read : problem
+                    Console.WriteLine("Not a correct BMP file [{0}]", filepath);
+                    return 0;
+                }
+
+                if (header[0] != 'B' || header[1] != 'M')
+                {
+                    Console.WriteLine("Not a correct BMP file [{0}]", filepath);
+                    return 0;
+                }
+
+                // Read ints from the byte array
+                dataPos = BitConverter.ToInt32(header, 0x0A);
+                imageSize = BitConverter.ToInt32(header, 0x22);
+                width = BitConverter.ToInt32(header, 0x12);
+                height = BitConverter.ToInt32(header, 0x16);
+
+                // Some BMP files are misformatted, guess missing information
+                if (imageSize == 0) imageSize = width * height * 3; // 3 : one byte for each Red, Green and Blue component
+                if (dataPos == 0) dataPos = 54; // The BMP header is done that way
+
+                // Actual RGB data
+                var data = new byte[imageSize];
+                fs.Read(data, 0, imageSize);
+
+                // Create one OpenGL texture
+                var textureID = GL.GenTexture();
+
+                // "Bind" the newly created texture : all future texture functions will modify this texture
+                GL.BindTexture(TextureTarget.Texture2D, textureID);
+
+                // Give the image to OpenGL
+                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, width, height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, data);
+
+                GL.TexParameterI(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, new[] { (uint)TextureMagFilter.Nearest });
+                GL.TexParameterI(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, new[] { (uint)TextureMinFilter.Nearest });
+
+                return textureID;
+
+            }
+            finally
+            {
+                fs.Close();
+                fs.Dispose();
             }
         }
     }

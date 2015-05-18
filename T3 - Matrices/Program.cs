@@ -13,7 +13,7 @@ namespace T3___Matrices
         {
             using (var game = new GameWindow(1024, 768,                     //ask for this window size
                                              GraphicsMode.Default,          //opentk picks the default format
-                                             "Tutorial 02 - The VAO",                 //title in the window
+                                             "Tutorial 03 - Matrices",      //title in the window
                                              GameWindowFlags.Default,       //creates a default window style
                                              DisplayDevice.Default,         //tells it to pick the default monitor
                                              3, 3,                          //we want opengl 3.3
