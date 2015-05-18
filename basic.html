@@ -885,23 +885,212 @@ for (int v = 0; v < 12*3 ; v++){
 <!--  A TEXTURED CUBE       -->
                 <section class="bs-docs-section">
                     <h1 class="page-header">A textured cube</h1>
-                    <section></section>
+                    <section>
+                        <p>In this tutorial, you will learn :</p>
+                        <ul>
+                            <li>What are UV coordinates</li>
+                            <li>How to load textures yourself</li>
+                            <li>How to use them in OpenGL</li>
+                            <li>What is filtering and mipmapping, and how to use them</li>
+                            <li>How to load texture more robustly with GLFW</li>
+                            <li>What is the alpha channel</li>
+                        </ul>
+                        <h2>About UV coordinates</h2>
+                        <section>
+                            <p>When texturing a mesh, you need a way to tell to OpenGL which part of the image has to be used for each triangle. This is done with UV coordinates.</p>
+                            <p>Each vertex has, on top of its position, a couple of floats, U and V. These coordinates are used to access the texture, in the following way :</p>
+                            <p class="row"><img class="col-md-12" src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/UVintro.png" /></p>
+                            <p>Notice how the texture is distorted on the triangle.</p>
+                        </section>
+                        <h2>Loading .BMP images yourself</h2>
+                        <section>
+                            <p>Knowing the BMP file format is not crucial : plenty of libraries can do it for you. But it’s very simple and can help you understand how things work under the hood. So we’ll write a BMP file loader from scratch, so that you know how it works, <span style="text-decoration: underline;">and never use it again</span></p>
+                            <p>Here is the declaration of the loading function :</p>
+                            <pre><code>public static int loadBMP_custom(string filepath);</code></pre>
+                            <p>so it’s used like this :</p>
+                            <pre><code>var image = loadBMP_custom("my_texture.bmp");</code></pre>
+                            <p>Let’s see how to read a BMP file, then.</p>
+                            <p>First, we’ll need some data. These variable will be set when reading the file.</p>
+                            <pre><code>// Data read from the header of the BMP file
+var header = new byte[54]; // Each BMP file begins by a 54-bytes header
+var dataPos = 0;     // Position in the file where the actual data begins
+var width = 0;
+var height = 0;
+var imageSize = 0;   // = width*height*3</code></pre>
+                            <p>We now have to actually open the file</p>
+                            <pre><code>if (!System.IO.File.Exists(filepath))
+{
+    Console.WriteLine("Image [{0}] could not be found.", filepath);
+    return 0;
+}
+
+var fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
+</code></pre>
+                            <p>The first thing in the file is a 54-bytes header. It contains information such as “Is this file really a BMP file?”, the size of the image, the number of bits per pixel, etc. So let’s read this header :</p>
+                            <pre><code>try
+{
+    if (fs.Read(header, 0, 54) != 54)
+    {
+        // If not 54 bytes read : problem
+        Console.WriteLine("Not a correct BMP file [{0}]", filepath);
+        return 0;
+    }
+   
+}
+finally
+{
+    fs.Close();
+    fs.Dispose();
+}</code></pre>
+                            <p>The header always begins by BM. As a matter of fact, here’s what you get when you open a .BMP file in a hexadecimal editor :</p>
+                            <p><img src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/hexbmp.png" /></p>
+                            <p>So we have to check that the two first bytes are really ‘B’ and ‘M’ :</p>
+                            <pre><code>if (header[0] != 'B' || header[1] != 'M')
+{
+    Console.WriteLine("Not a correct BMP file [{0}]", filepath);
+    return 0;
+}</code></pre>
+                            <p>Now we can read the size of the image, the location of the data in the file, etc :</p>
+                            <pre><code>// Read ints from the byte array
+dataPos = BitConverter.ToInt32(header, 0x0A);
+imageSize = BitConverter.ToInt32(header, 0x22);
+width = BitConverter.ToInt32(header, 0x12);
+height = BitConverter.ToInt32(header, 0x16)</code></pre>
+                            <p>We have to make up some info if it’s missing :</p>
+                            <pre><code>// Some BMP files are misformatted, guess missing information
+if (imageSize == 0) imageSize = width * height * 3; // 3 : one byte for each Red, Green and Blue component
+if (dataPos == 0) dataPos = 54; // The BMP header is done that way
+</code></pre>
+                            <p>Now that we know the size of the image, we can allocate some memory to read the image into, and read :</p>
+                            <pre><code>// Actual RGB data
+var data = new byte[imageSize];
+
+// Read the actual data from the file into the buffer
+fs.Read(data, 0, imageSize);
+</code></pre>
+                            <p>We arrive now at the real OpenGL part. Creating textures is very similar to creating vertex buffers : Create a texture, bind it, fill it, and configure it.</p>
+                            <p>In glTexImage2D, the GL_RGB indicates that we are talking about a 3-component color, and GL_BGR says how exactly it is represented in RAM. As a matter of fact, BMP does not store Red->Green->Blue but Blue->Green->Red, so we have to tell it to OpenGL.</p>
+                            <pre><code>// Create one OpenGL texture
+var textureID = GL.GenTexture();
+// "Bind" the newly created texture : all future texture functions will modify this texture
+GL.BindTexture(TextureTarget.Texture2D, textureID);
+// Give the image to OpenGL
+GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, width, height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, data);
+GL.TexParameterI(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, new[] { (uint)TextureMagFilter.Nearest });
+GL.TexParameterI(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, new[] { (uint)TextureMinFilter.Nearest })</code></pre>
+                            <p>We’ll explain those last two lines later. Meanwhile, on the C++-side, you can use your new function to load a texture :</p>
+                            <pre><code>var textureID = loadBMP_custom("uvtemplate.bmp");</code></pre>
+                            <div class="alert alert-warning">
+                                <p>Another very important point : use power-of-two textures !</p>
+                                <ul>
+                                    <li>good : 128*128*, 256*256, 1024*1024, 2*2…</li>
+                                    <li>bad : 127*128, 3*5, …</li>
+                                    <li>okay but weird : 128*256</li>
+                                </ul>
+                            </p>
+                        </section>
+                        <h2>Using the texture in OpenGL</h2>
+                        <section>
+                            <p>We’ll have a look at the fragment shader first. Most of it is straightforward :</p>
+                            <pre><code class="glsl">#version 330 core
+// Interpolated values from the vertex shaders
+in vec2 UV;
+out vec3 color;
+ 
+// Values that stay constant for the whole mesh.
+uniform sampler2D myTextureSampler;
+void main(){
+    // Output color = color specified in the texture at the specified uv
+    color = texture(myTextureSampler, UV).rgb;
+}</code></pre>
+                            <p>Three things :</p>
+                            <ul>
+                                <li>The fragment shader needs UV coordinates. Seems fair.</li>
+                                <li>It also needs a “sampler2D” in order to know which texture to access (you can access several texture in the same shader)</li>
+                                <li>Finally, accessing a texture is done with texture(), which gives back a (R,G,B,A) vec4. We’ll see about the A shortly.</li>
+                            </ul>
+                            <p>The vertex shader is simple too, you just have to pass the UVs to the fragment shader :</p>
+                            <pre><code class="glsl">#version 330 core
+// Input vertex data, different for all executions of this shader.
+layout(location = 0) in vec3 vertexPosition_modelspace;
+layout(location = 1) in vec2 vertexUV;
+uniform mat4 MVP;
+// Output data ; will be interpolated for each fragment.
+out vec2 UV;
+void main(){
+ 
+    // Output position of the vertex, in clip space : MVP * position
+    vec4 v = vec4(vertexPosition_modelspace,1); // Transform an homogeneous 4D vector, remember ?
+    gl_Position = MVP * v;
+	UV = vertexUV;
+}</code></pre>
+                            <p>Remember “layout(location = 1) in vec2 vertexUV” from Tutorial 4 ? Well, we’ll have to do the exact same thing here, but instead of giving a buffer (R,G,B) triplets, we’ll give a buffer of (U,V) pairs.</p>
+                            <pre><code>//UV coordinatesfor each vertex. They were created with Blender. You'll learn shortly how to do this yourself.
+var g_uv_buffer_data = new[] {
+    0.000059f, 1.0f-0.000004f,
+    0.000103f, 1.0f-0.336048f,
+    0.335973f, 1.0f-0.335903f,
+    1.000023f, 1.0f-0.000013f,
+    0.667979f, 1.0f-0.335851f,
+    0.999958f, 1.0f-0.336064f,
+    0.667979f, 1.0f-0.335851f,
+    0.336024f, 1.0f-0.671877f,
+    0.667969f, 1.0f-0.671889f,
+    1.000023f, 1.0f-0.000013f,
+    0.668104f, 1.0f-0.000013f,
+    0.667979f, 1.0f-0.335851f,
+    0.000059f, 1.0f-0.000004f,
+    0.335973f, 1.0f-0.335903f,
+    0.336098f, 1.0f-0.000071f,
+    0.667979f, 1.0f-0.335851f,
+    0.335973f, 1.0f-0.335903f,
+    0.336024f, 1.0f-0.671877f,
+    1.000004f, 1.0f-0.671847f,
+    0.999958f, 1.0f-0.336064f,
+    0.667979f, 1.0f-0.335851f,
+    0.668104f, 1.0f-0.000013f,
+    0.335973f, 1.0f-0.335903f,
+    0.667979f, 1.0f-0.335851f,
+    0.335973f, 1.0f-0.335903f,
+    0.668104f, 1.0f-0.000013f,
+    0.336098f, 1.0f-0.000071f,
+    0.000103f, 1.0f-0.336048f,
+    0.000004f, 1.0f-0.671870f,
+    0.336024f, 1.0f-0.671877f,
+    0.000103f, 1.0f-0.336048f,
+    0.336024f, 1.0f-0.671877f,
+    0.335973f, 1.0f-0.335903f,
+    0.667969f, 1.0f-0.671889f,
+    1.000004f, 1.0f-0.671847f,
+    0.667979f, 1.0f-0.335851f
+}</code></pre>
+                            <p>The UV coordinates above correspond to the following model :</p>
+                            <p><img src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/uv_mapping_blender-300x222.png" /></p>
+                            <p class="alert alert-warning">The rest is obvious. Generate the buffer, bind it, fill it, configure it, and draw the Vertex Buffer as usual. Just be careful to use 2 as the second parameter (size) of glVertexAttribPointer instead of 3.</p>
+                            <p>This is the result :</p>
+                            <p><img src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/nearfiltering.png" /></p>
+                            <p>and a zoomed-in version :</p>
+                            <p><img src="http://www.opengl-tutorial.org/wp-content/uploads/2011/04/nearfiltering_zoom.png" /></p>
+                        </section>
+                        <h2>What is filtering and mipmapping, and how to use them</h2>
+                        <section>TO BE CONTINUED</section>
+                    </section>
                 </section>
 <!--  KEYBOARD AND MOUSE    -->
-                <section class="bs-docs-section">
+                <!--<section class="bs-docs-section">
                     <h1 class="page-header">Keyboard and mouse</h1>
                     <section></section>
-                </section>
+                </section>-->
 <!--  MODEL LOADING         -->
-                <section class="bs-docs-section">
+                <!--<section class="bs-docs-section">
                     <h1 class="page-header">Model loading</h1>
                     <section></section>
-                </section>
+                </section>-->
 <!--  BASIC SHADING         -->
-                <section class="bs-docs-section">
+                <!--<section class="bs-docs-section">
                     <h1 class="page-header">Basic shading</h1>
                     <section></section>
-                </section>
+                </section>-->
             </div>
             <div class="col-md-3" role="complementary">
                 <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix-top">
